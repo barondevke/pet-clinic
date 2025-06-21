@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { CalendarDays, Clock, PawPrint, Shield, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function Home() {
   return (
@@ -65,7 +66,7 @@ export default function Home() {
                 </div>
               </div>
               <img
-                src="/placeholder.svg?height=550&width=550"
+                src="/images/pet-landing-page.jpeg"
                 alt="Pet Clinic Management"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
                 width={550}
