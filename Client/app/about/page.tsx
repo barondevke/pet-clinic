@@ -5,29 +5,31 @@ import { features } from "process";
 export default function about() {
     return (
         <div>
-            <header className="header">
-                <div className="nav-container">
-                    <div className="logo">PetCare Clinic</div>
-                    <nav>
+            <header className="bg-white shadow sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+                    <div className="text-2xl font-bold text-gray-800 flex items-center">
+                        <span className="text-green-500 text-3xl mr-2">🐾</span>PetCare Clinic
+                    </div>
+                    <nav className="hidden md:flex space-x-6 font-medium text-gray-700">
                         <ul>
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="/services">Services</Link></li>
-                            <li><Link href="/about">About</Link></li>
-                            <li><Link href="/contact"></Link></li>
+                            <li><Link href="/" className="hover:text-green-500">Home</Link></li>
+                            <li><Link href="/services" className="hover:text-green-500">Services</Link></li>
+                            <li><Link href="/about" className="hover:text-green-500">About</Link></li>
+                            <li><Link href="/contact" className="hover:text-green-500"></Link></li>
                         </ul>
                     </nav>
-                    <div className="auth-buttons">
-                        <Link href="/login" className="btn btn-outline">Sign In</Link>
-                        <Link href="register" className="btn btn-primary">Register</Link>
+                    <div className="flex space-x-2">
+                        <Link href="/login" className="border border-gray-300 px-4 py-2 rounded-lg hover:border-green-500 hover:text-green-500 font-semibold">Sign In</Link>
+                        <Link href="register" className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 font-semibold">Register</Link>
                     </div>
                 </div>
             </header>
 
-            <section className="hero-section">
-                <div className="container">
+            <section className="bg-green-50 py-20">
+                <div className="max-w-4xl mx-auto text-center px-6">
                     <div className="hero-content">
-                        <h1 className="hero-title">Transform Your Pet Clinic Operations</h1>
-                        <p className="hero-subtitle">
+                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-6">Transform Your Pet Clinic Operations</h1>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                             Discover how our Comprehensive management system revolutionalizes veterinary
                             practice management, making your clinic more efficient , organised, and profitable.
                         </p>
