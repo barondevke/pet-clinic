@@ -70,15 +70,17 @@ export default function about() {
                 </div>
             </section>
 
-            <section className="cta-section">
-                <div className="container">
+
+
+            <section className="bg-gradient-to-r from-green-500 to-green-600 py-20">
+                <div className="max-w-3xl mx-auto text-center text-white px-6">
                     <div className="cta-content">
-                        <h2 className="cta-title">Ready to  Transform Your Clinic?</h2>
-                        <p className="cta-description">
+                        <h2 className="text-4xl font-bold mb-4">Ready to  Transform Your Clinic?</h2>
+                        <p className="text-lg mb-6">
                             Join thousands of veterinary professionals who trust our platform
                             to manage their practices efficient.
                         </p>
-                        <Link href="register" className="btn btn-white">Book A Free Demo</Link>
+                        <Link href="register" className="bg-white text-green-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition">Book A Free Demo</Link>
                     </div>
                 </div>
             </section>
