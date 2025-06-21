@@ -29,7 +29,10 @@ public class Appointment {
     @Column(name = "time", nullable = false)
     private String time;
 
-    // ... existing fields
+    @Column(name = "status", nullable = false)
+    private String status = "pending";  // NEW FIELD
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -87,4 +90,11 @@ public class Appointment {
         this.time = time;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
