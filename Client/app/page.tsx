@@ -58,7 +58,7 @@ export default function Home() {
                       Book Appointment
                     </Button>
                   </Link>
-                  <Link href="/about">
+                  <Link href="/about">  {/* MOdifying */}
                     <Button size="lg" variant="outline">
                       Learn More
                     </Button>
