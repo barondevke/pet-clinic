@@ -18,4 +18,18 @@ public class AppointmentController {
         Appointment saved = appointmentService.createAppointment(appointment);
         return ResponseEntity.ok(saved);
     }
+
+    //JASON CHANGES START
+    // Get appointments by status (e.g., PENDING, COMPLETED)
+    @GetMapping("/status/{status}")
+    public List<Appointment> getAppointmentsByStatus(@PathVariable Appointment.Status status) {
+        return appointmentService.getAppointmentsByStatus(status);
+    }
+
+    // Mark appointment as completed
+    @PutMapping("/{id}/complete")
+    public Appointment completeAppointment(@PathVariable Long id) {
+        return appointmentService.completeAppointment(id);
+    }
+    //JASON CHANGES END    
 }
