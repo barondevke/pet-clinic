@@ -1,10 +1,11 @@
 "use client"
+
 import React from "react";
 
-export default function services(){
+export default function(){
     return(
         <div>
-            <p>This is the services page</p>
+            <p>This is a contact us page</p>
         </div>
     );
 }
