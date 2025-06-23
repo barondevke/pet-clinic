@@ -7,11 +7,6 @@ import java.time.LocalDate;
 @Table(name = "appointments")
 public class Appointment {
 
-    public enum Status {
-        PENDING,
-        COMPLETED
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,11 +29,10 @@ public class Appointment {
     @Column(name = "time", nullable = false)
     private String time;
 
+  
+
     @Column(name = "status", nullable = false)
-   //  private String status = "pending";  // NEW FIELD
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status = Status.PENDING;
+    private String status = "PENDING";
 
     // Getters and setters
 
@@ -101,8 +95,9 @@ public class Appointment {
     public String getStatus() {
         return status;
     }
-
+    
     public void setStatus(String status) {
         this.status = status;
     }
+    
 }
