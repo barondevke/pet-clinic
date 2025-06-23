@@ -35,6 +35,10 @@ public class AppointmentService {
         return appointmentRepository.findByStatus(status.toUpperCase());
     }
     
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
+    
     
     
 }

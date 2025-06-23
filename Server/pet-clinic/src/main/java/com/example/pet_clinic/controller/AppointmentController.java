@@ -21,7 +21,6 @@ public class AppointmentController {
         return ResponseEntity.ok(saved);
     }
 
-    
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Appointment>> getAppointmentsByStatus(@PathVariable String status) {
         if (!status.equalsIgnoreCase("pending") && !status.equalsIgnoreCase("completed")) {
@@ -41,4 +40,11 @@ public class AppointmentController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping
+public ResponseEntity<List<Appointment>> getAllAppointments() {
+    List<Appointment> appointments = appointmentService.getAllAppointments();
+    return ResponseEntity.ok(appointments);
+}
+
 }

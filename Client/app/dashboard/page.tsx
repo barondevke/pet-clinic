@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
   BarChart3,
@@ -32,63 +32,38 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar"
 import { format } from "date-fns"
 
+import axios from "axios"
+
+export interface Appointment {
+  id: number;
+  time: string;
+  petName: string;
+  petType: string;
+  ownerName: string;
+  visitReason: string;
+  status: string;
+}
+
+// Fetch function
+async function getAllAppointments(): Promise<Appointment[]> {
+  const response = await axios.get<Appointment[]>("http://localhost:8080/api/appointments");
+  return response.data;
+}
+
 export default function AdminDashboardPage() {
   const [date, setDate] = useState<Date>(new Date())
+  const [appointments, setAppointments] = useState<Appointment[]>([])
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<"pending" | "completed">("pending");
 
  
+  useEffect(() => {
+    getAllAppointments()
+      .then(setAppointments)
+      .catch((err) => console.error("Failed to load appointments:", err))
+  }, [])
 
-
-
-  
-  const appointments = [
-    {
-      id: 1,
-      time: "09:00 AM",
-      petName: "Max",
-      petType: "Dog",
-      ownerName: "John Smith",
-      type: "Vaccination",
-      status: "completed"
-    },
-    {
-      id: 2,
-      time: "10:30 AM",
-      petName: "Bella",
-      petType: "Cat",
-      ownerName: "Sarah Johnson",
-      type: "Check-up",
-      status: "completed",
-    },
-    {
-      id: 3,
-      time: "11:45 AM",
-      petName: "Charlie",
-      petType: "Dog",
-      ownerName: "Michael Brown",
-      type: "Surgery",
-      status: "completed",
-    },
-    {
-      id: 4,
-      time: "02:15 PM",
-      petName: "Luna",
-      petType: "Cat",
-      ownerName: "Emily Davis",
-      type: "Dental Cleaning",
-      status: "pending",
-    },
-    {
-      id: 5,
-      time: "03:30 PM",
-      petName: "Cooper",
-      petType: "Dog",
-      ownerName: "David Wilson",
-      type: "Check-up",
-      status: "completed",
-    },
-  ]
+ 
 
   
   const pendingRequests = [
@@ -136,7 +111,7 @@ export default function AdminDashboardPage() {
   
   const statistics = {
     totalAppointments: appointments.length,
-    completedAppointments: appointments.filter(a => a.status === "completed").length,
+    completedAppointments: appointments.filter(a => a.status === "COMPLETED").length,
     pendingRequests: appointments.filter(a => a.status === "pending").length,
     totalPatients: 156,
     newPatients: 12,
@@ -389,13 +364,13 @@ export default function AdminDashboardPage() {
                     
                     </CardHeader>
                     <CardContent>
-                    {appointments.filter(a => a.status === "completed").length === 0 ? (
+                    {appointments.filter(a => a.status === "COMPLETED").length === 0 ? (
       <div className="text-center py-6 text-muted-foreground">
         No completed appointments
       </div>
     ) : (
       appointments
-        .filter(a => a.status === "completed")
+        .filter(a => a.status === "COMPLETED")
         .map(request => (
           <div key={request.id} className="rounded border p-4 mb-2">
             <div className="font-semibold">{request.petName} ({request.petType})</div>
