@@ -1,33 +1,34 @@
 package com.example.pet_clinic.service;
 
-import com.example.pet_clinic.model.User;
-import com.example.pet_clinic.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.example.pet_clinic.controller.AuthRequest;
+import com.example.pet_clinic.model.User;
+import com.example.pet_clinic.repository.UserRepository;
 
 @Service
 public class UserService {
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public User register(String username, String password, String name) {
-        if (userRepository.findByUsername(username).isPresent()) {
+    public User register(AuthRequest request) {
+        if (userRepository.findByUsername(request.username).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
-    
+
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setName(name); 
-    
+        user.setUsername(request.username);
+        user.setPassword(request.password); // In production, hash this!
+        user.setName(request.name);
+
         return userRepository.save(user);
     }
-    
-    public boolean authenticate(String username, String password) {
-        Optional<User> user = userRepository.findByUsername(username);
-        return user.isPresent() && user.get().getPassword().equals(password);
+
+    public boolean authenticate(AuthRequest request) {
+        return userRepository.findByUsername(request.username)
+                .map(u -> u.getPassword().equals(request.password))
+                .orElse(false);
     }
-    
-    }
+}
