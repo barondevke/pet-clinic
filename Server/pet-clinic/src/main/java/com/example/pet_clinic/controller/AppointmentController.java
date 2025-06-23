@@ -41,8 +41,4 @@ public class AppointmentController {
             return ResponseEntity.notFound().build();
         }
     }
-<<<<<<< HEAD
-=======
-      
->>>>>>> be9e1d6cdc7e39bc6b9c664cfd5d73e75be20a4e
 }
