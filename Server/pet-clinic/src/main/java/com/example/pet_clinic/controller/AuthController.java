@@ -26,5 +26,9 @@ public class AuthController {
         boolean success = userService.authenticate(request);
         return success ? "Login successful" : "Invalid credentials";
     }
+<<<<<<< HEAD
+}
+=======
 }
 
+>>>>>>> 62d7034db8f7064ab6d5ed36d1c8cdb6939814bb
