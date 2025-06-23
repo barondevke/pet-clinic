@@ -21,7 +21,8 @@ public class User {
     // Constructors
     public User() {
     }
-
+    
+    //Args Construcrtor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -31,7 +32,7 @@ public class User {
     public Long getId() {
         return id;
     }
-
+    
     public String getUsername() {
         return username;
     }
