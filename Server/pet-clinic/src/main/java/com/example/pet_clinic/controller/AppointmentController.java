@@ -21,7 +21,7 @@ public class AppointmentController {
         return ResponseEntity.ok(saved);
     }
 
-    //  Get appointments by status 
+    // Get appointments by status (e.g., PENDING, COMPLETED)
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Appointment>> getAppointmentsByStatus(@PathVariable String status) {
         if (!status.equalsIgnoreCase("PENDING") && !status.equalsIgnoreCase("COMPLETED")) {
