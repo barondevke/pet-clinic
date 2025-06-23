@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {
@@ -19,17 +21,24 @@ public class AppointmentController {
         return ResponseEntity.ok(saved);
     }
 
-    //JASON CHANGES START
-    // Get appointments by status (e.g., PENDING, COMPLETED)
+    //  Get appointments by status 
     @GetMapping("/status/{status}")
-    public List<Appointment> getAppointmentsByStatus(@PathVariable Appointment.Status status) {
-        return appointmentService.getAppointmentsByStatus(status);
+    public ResponseEntity<List<Appointment>> getAppointmentsByStatus(@PathVariable String status) {
+        if (!status.equalsIgnoreCase("PENDING") && !status.equalsIgnoreCase("COMPLETED")) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Appointment> results = appointmentService.getAppointmentsByStatus(status.toUpperCase());
+        return ResponseEntity.ok(results);
     }
 
     // Mark appointment as completed
     @PutMapping("/{id}/complete")
-    public Appointment completeAppointment(@PathVariable Long id) {
-        return appointmentService.completeAppointment(id);
+    public ResponseEntity<Appointment> completeAppointment(@PathVariable Long id) {
+        try {
+            Appointment updated = appointmentService.completeAppointment(id);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
-    //JASON CHANGES END    
 }

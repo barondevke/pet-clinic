@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { features } from "process";
+// import { features } from "process";
 
 export default function about() {
     return (
