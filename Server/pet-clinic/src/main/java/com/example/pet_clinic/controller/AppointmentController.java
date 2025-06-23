@@ -19,7 +19,7 @@ public class AppointmentController {
         return ResponseEntity.ok(saved);
     }
 
-    //JASON CHANGES START
+    
     // Get appointments by status (e.g., PENDING, COMPLETED)
     @GetMapping("/status/{status}")
     public List<Appointment> getAppointmentsByStatus(@PathVariable Appointment.Status status) {
@@ -31,5 +31,5 @@ public class AppointmentController {
     public Appointment completeAppointment(@PathVariable Long id) {
         return appointmentService.completeAppointment(id);
     }
-    //JASON CHANGES END    
+      
 }
