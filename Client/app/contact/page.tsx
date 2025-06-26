@@ -15,6 +15,54 @@ export default function contact(){
                     Have questions about our pet care services? We'd Love to hear from you.
                     Send us a message and we'll respond as soon as possible.
                 </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    {/* Form */}
+                    <div className="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-x1 font-semibold mb-4">Send Us a Message</h2>
+                        <form className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input
+                                    type="text"
+                                    placeholder="Your Full Name"
+                                    className="border p-2 rounded w-full"
+                                    required
+                                />
+
+                                <input 
+                                    type="email"
+                                    placeholder="your_email@gmail.com"
+                                    className="border p-2 rounded w-full"
+                                    required
+                                />
+
+                                <input 
+                                    type="tel"
+                                    placeholder="+254 7XX XXX XXX"
+                                    className="border p-2 rounded w-full"
+                                />
+
+                                <input 
+                                    type="text"
+                                    placeholder="How can we help? "
+                                    className="border p-2 rounded w-full"
+                                />
+                            </div>
+                            <textarea 
+                                placeholder="Tell Us more about your inquiry..."
+                                className="border p-2 rounded w-full h-32 resize-none"
+                                required
+                            />
+
+                            <button type="submit" className="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+
+
+                </div>
             </div>
         </div>
     );
