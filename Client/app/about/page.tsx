@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 // import { features } from "process";
+import { CalendarDays, Clock, PawPrint, Shield, Users } from "lucide-react"
 
 export default function about() {
     return (
@@ -8,7 +9,10 @@ export default function about() {
             <header className="bg-white shadow sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
                     <div className="text-2xl font-bold text-gray-800 flex items-center">
-                        <span className="text-green-500 text-3xl mr-2">🐾</span>PetCare Clinic
+                        <div className="flex items-center gap-2">
+            <PawPrint className="h-6 w-6 text-emerald-600" />
+            <span className="text-xl font-bold">PetCare Clinic</span>
+          </div>
                     </div>
                     <nav className="hidden md:flex space-x-6 font-medium text-gray-700">
                         <ul>
