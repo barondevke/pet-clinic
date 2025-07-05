@@ -53,11 +53,6 @@ export default function Home() {
                   manage patient records, and provide the best care for your furry patients.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/book-appointment">
-                    <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                      Book Appointment
-                    </Button>
-                  </Link>
                   <Link href="/about">  {/* MOdifying */}
                     <Button size="lg" variant="outline">
                       Learn More

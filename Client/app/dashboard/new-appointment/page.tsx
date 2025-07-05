@@ -29,22 +29,14 @@ export default function BookAppointmentPage() {
   const [appointmentType, setAppointmentType] = useState<string>("")
   const [submitted, setSubmitted] = useState(false)
 
-  // Available time slots
+  // form input refs
+  const [petName, setPetName] = useState("")
+  const [ownerName, setOwnerName] = useState("")
+
   const timeSlots = [
-    "9:00 AM",
-    "9:30 AM",
-    "10:00 AM",
-    "10:30 AM",
-    "11:00 AM",
-    "11:30 AM",
-    "1:00 PM",
-    "1:30 PM",
-    "2:00 PM",
-    "2:30 PM",
-    "3:00 PM",
-    "3:30 PM",
-    "4:00 PM",
-    "4:30 PM",
+    "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM",
+    "11:30 AM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM",
+    "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM",
   ]
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -52,8 +44,28 @@ export default function BookAppointmentPage() {
     setIsLoading(true)
 
     try {
-      // In a real app, you would call your API to create the appointment
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const appointmentData = {
+        petName,
+        petType,
+        ownerName,
+        visitReason: appointmentType,
+        requestedDate: date?.toISOString().split("T")[0], // format as YYYY-MM-DD
+        time,
+        status: "PENDING",
+      }
+
+      const response = await fetch("http://localhost:8080/api/appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appointmentData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to create appointment")
+      }
+
       setSubmitted(true)
     } catch (error) {
       console.error("Error creating appointment:", error)
@@ -82,15 +94,9 @@ export default function BookAppointmentPage() {
               <Alert className="bg-emerald-50 border-emerald-200">
                 <AlertTitle>Appointment Details</AlertTitle>
                 <AlertDescription className="flex flex-col gap-1">
-                  <span>
-                    <strong>Date:</strong> {format(date, "PPPP")}
-                  </span>
-                  <span>
-                    <strong>Time:</strong> {time}
-                  </span>
-                  <span>
-                    <strong>Service:</strong> {appointmentType}
-                  </span>
+                  <span><strong>Date:</strong> {format(date, "PPPP")}</span>
+                  <span><strong>Time:</strong> {time}</span>
+                  <span><strong>Service:</strong> {appointmentType}</span>
                 </AlertDescription>
               </Alert>
             )}
@@ -130,14 +136,19 @@ export default function BookAppointmentPage() {
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="pet-name">Pet Name</Label>
-                <Input id="pet-name" name="petName" placeholder="Enter your pet's name" required />
+                <Input
+                  id="pet-name"
+                  name="petName"
+                  placeholder="Enter your pet's name"
+                  required
+                  value={petName}
+                  onChange={(e) => setPetName(e.target.value)}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pet-type">Pet Type</Label>
                 <Select required value={petType} onValueChange={setPetType}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select pet type" />
-                  </SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select pet type" /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="dog">Dog</SelectItem>
                     <SelectItem value="cat">Cat</SelectItem>
@@ -152,30 +163,30 @@ export default function BookAppointmentPage() {
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="owner-name">Your Name</Label>
-                <Input id="owner-name" name="ownerName" placeholder="Enter your full name" required />
+                <Input
+                  id="owner-name"
+                  name="ownerName"
+                  placeholder="Enter your full name"
+                  required
+                  value={ownerName}
+                  onChange={(e) => setOwnerName(e.target.value)}
+                />
               </div>
               <div className="space-y-2">
-              <Label htmlFor="appointment-type">Reason for Visit</Label>
-              <Select required value={appointmentType} onValueChange={setAppointmentType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select reason for visit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="check-up">Regular Check-up</SelectItem>
-                  <SelectItem value="vaccination">Vaccination</SelectItem>
-                  <SelectItem value="illness">Illness or Injury</SelectItem>
-                  <SelectItem value="dental">Dental Cleaning</SelectItem>
-                  <SelectItem value="grooming">Grooming</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+                <Label htmlFor="appointment-type">Reason for Visit</Label>
+                <Select required value={appointmentType} onValueChange={setAppointmentType}>
+                  <SelectTrigger><SelectValue placeholder="Select reason for visit" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="check-up">Regular Check-up</SelectItem>
+                    <SelectItem value="vaccination">Vaccination</SelectItem>
+                    <SelectItem value="illness">Illness or Injury</SelectItem>
+                    <SelectItem value="dental">Dental Cleaning</SelectItem>
+                    <SelectItem value="grooming">Grooming</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            
-            </div>
-
-            
-
-           
 
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
@@ -194,7 +205,6 @@ export default function BookAppointmentPage() {
                       onSelect={setDate}
                       initialFocus
                       disabled={(date) => {
-                        // Disable past dates and weekends
                         const today = new Date()
                         today.setHours(0, 0, 0, 0)
                         const day = date.getDay()
@@ -229,10 +239,8 @@ export default function BookAppointmentPage() {
                 </Select>
               </div>
             </div>
-
-
-            
           </CardContent>
+
           <CardFooter className="flex flex-col">
             <Button
               type="submit"
@@ -243,14 +251,9 @@ export default function BookAppointmentPage() {
             </Button>
             <p className="mt-4 text-center text-sm text-muted-foreground">
               By booking an appointment, you agree to our{" "}
-              <Link href="/terms" className="text-emerald-600 hover:underline">
-                Terms of Service
-              </Link>{" "}
+              <Link href="/terms" className="text-emerald-600 hover:underline">Terms of Service</Link>{" "}
               and{" "}
-              <Link href="/privacy" className="text-emerald-600 hover:underline">
-                Privacy Policy
-              </Link>
-              .
+              <Link href="/privacy" className="text-emerald-600 hover:underline">Privacy Policy</Link>.
             </p>
           </CardFooter>
         </form>

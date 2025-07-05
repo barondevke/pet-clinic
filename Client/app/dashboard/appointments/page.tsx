@@ -27,6 +27,7 @@ import { format } from "date-fns"
 import axios from "axios"
 
 export interface Appointment {
+  type: any
   id: number;
   time: string;
   petName: string;

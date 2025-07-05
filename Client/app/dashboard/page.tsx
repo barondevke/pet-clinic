@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
   const statistics = {
     totalAppointments: appointments.length,
     completedAppointments: appointments.filter(a => a.status === "COMPLETED").length,
-    pendingRequests: appointments.filter(a => a.status === "pending").length,
+    pendingRequests: appointments.filter(a => a.status === "PENDING").length,
     totalPatients: 156,
     newPatients: 12,
     
@@ -336,13 +336,13 @@ export default function AdminDashboardPage() {
                       <CardDescription>Review and manage pending appointments</CardDescription>
                     </CardHeader>
                     <CardContent>
-                    {appointments.filter(a => a.status === "pending").length === 0 ? (
+                    {appointments.filter(a => a.status === "PENDING").length === 0 ? (
       <div className="text-center py-6 text-muted-foreground">
         No pending appointments
       </div>
     ) : (
       appointments
-        .filter(a => a.status === "pending")
+        .filter(a => a.status === "PENDING")
         .map(request => (
           <div key={request.id} className="rounded border p-4 mb-2">
             <div className="font-semibold">{request.petName} ({request.petType})</div>
