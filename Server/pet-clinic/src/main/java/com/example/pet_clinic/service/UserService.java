@@ -8,7 +8,7 @@ import com.example.pet_clinic.model.User;
 import com.example.pet_clinic.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserRegistrationService, UserAuthenticationService {
 
     @Autowired
     private UserRepository userRepository;

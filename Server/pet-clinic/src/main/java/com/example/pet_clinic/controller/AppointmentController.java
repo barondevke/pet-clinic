@@ -30,7 +30,7 @@ public class AppointmentController {
         return ResponseEntity.ok(results);
     }
 
-    // ✅ Mark appointment as completed
+    // Mark appointment as completed
     @PutMapping("/{id}/complete")
     public ResponseEntity<Appointment> completeAppointment(@PathVariable Long id) {
         try {

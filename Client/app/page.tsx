@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { CalendarDays, Clock, PawPrint, Shield, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import * as Image from "next/image"
 
 export default function Home() {
   return (
@@ -208,7 +208,7 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support" className="text-gray-500 hover:underline">
+                  <Link href="/contact" className="text-gray-500 hover:underline">
                     Support
                   </Link>
                 </li>
