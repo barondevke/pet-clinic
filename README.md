@@ -157,7 +157,7 @@ public class UserService {
 ```
 
 ## ABSTRACTION
-Involves hiding certain details and showing only essential information to the user, e.g in `userService.java` in which it is an abstraction layer over the database logic, in that raw databse querries are not exposed, and data  fetching/saving is delegated to `userRepository`
+Involves hiding certain details and showing only essential information to the user, e.g in `userService.java` in which it is an abstraction layer over the database logic, in that raw database querries are not exposed, and data  fetching/saving is delegated to `userRepository`
 
 ```java
 @Autowired
