@@ -14,13 +14,13 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
+    //Registers a new user
     @PostMapping("/signup")
     public String signup(@RequestBody AuthRequest request) {
         userService.register(request);
         return "User registered successfully";
     }
-
+    //Authenticates a user
     @PostMapping("/signin")
     public String signin(@RequestBody AuthRequest request) {
         boolean success = userService.authenticate(request);
